@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'autopark:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=news
+
+    ports:
+      - "8082:8082"
+
+  db:
+    image: postgres:11.7
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=news
+    ports:
+      - "5433:5432"
