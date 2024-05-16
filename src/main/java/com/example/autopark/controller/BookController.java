@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,8 +28,13 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getBooks() {
-        List<Book> books = bookService.getAll();
+    public ResponseEntity<?> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAll());
+    }
+
+    @GetMapping("/actual")
+    public ResponseEntity<?> getAllActualBooks() {
+        List<Book> books = bookService.getAllActual();
         if (!getCurrentUser()) {
             return ResponseEntity.ok(BookDto.toDto(books));
         }

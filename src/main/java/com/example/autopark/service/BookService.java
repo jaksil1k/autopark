@@ -14,4 +14,6 @@ public interface BookService {
     void update(Book book);
 
     void delete(UUID id);
+
+    List<Book> getAllActual();
 }

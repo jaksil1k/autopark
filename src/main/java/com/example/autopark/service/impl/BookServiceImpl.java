@@ -38,4 +38,9 @@ public class BookServiceImpl implements BookService {
     public void delete(UUID id) {
         bookRepository.deleteById(id);
     }
+
+    @Override
+    public List<Book> getAllActual() {
+        return bookRepository.findAllActual(Calendar.getInstance().getTime());
+    }
 }
