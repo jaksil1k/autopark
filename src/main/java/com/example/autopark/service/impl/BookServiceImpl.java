@@ -55,4 +55,9 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findByLicensePlateOrderByCreatedAtDesc(licensePlate);
     }
 
+    @Override
+    public Boolean checkForPayed(String licensePlate) {
+        return bookRepository.findAllByLicensePlateAndIsPayed(licensePlate, true).isEmpty();
+    }
+
 }

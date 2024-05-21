@@ -15,4 +15,6 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     List<Book> findAllActual(Date date);
 
     Optional<Book> findByLicensePlateOrderByCreatedAtDesc(String licensePlate);
+
+    Optional<Book> findAllByLicensePlateAndIsPayed(String licensePlate, Boolean isPayed);
 }

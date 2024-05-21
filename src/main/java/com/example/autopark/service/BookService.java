@@ -1,6 +1,5 @@
 package com.example.autopark.service;
 
-import com.example.autopark.dto.book.BookDto;
 import com.example.autopark.model.Book;
 
 import java.util.List;
@@ -21,4 +20,6 @@ public interface BookService {
     List<Book> getAllActual();
 
     Optional<Book> getPay(String licensePlate);
+
+    Boolean checkForPayed(String licensePlate);
 }

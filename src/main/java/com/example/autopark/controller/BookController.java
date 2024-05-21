@@ -3,7 +3,6 @@ package com.example.autopark.controller;
 import com.example.autopark.dto.EntityIdDto;
 import com.example.autopark.dto.book.BookDto;
 import com.example.autopark.model.Book;
-import com.example.autopark.model.User;
 import com.example.autopark.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,6 +21,9 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<?> createBook(@RequestBody Book book) {
+        if (!bookService.checkForPayed(book.getLicensePlate())) {
+            return ResponseEntity.badRequest().build();
+        }
         bookService.save(book);
         return ResponseEntity.ok().build();
     }
