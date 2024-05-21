@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -18,5 +19,7 @@ public class Book extends BaseEntity {
     private Integer floor;
     private Integer slot;
     private String licensePlate;
-    private Integer hours;
+    private String name;
+    private String phone;
+    private Boolean isPayed;
 }
