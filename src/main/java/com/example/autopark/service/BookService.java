@@ -13,7 +13,7 @@ public interface BookService {
 
     Optional<Book> getById(UUID id);
 
-    void update(Book book);
+    Book update(Book book);
 
     void delete(UUID id);
 

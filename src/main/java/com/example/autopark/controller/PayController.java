@@ -12,7 +12,10 @@ import java.util.Optional;
 
 @RequestMapping("/pay")
 @RequiredArgsConstructor
+@RestController
 public class PayController {
+    private static Integer rate = 100;
+
     private final BookService bookService;
 
     @GetMapping
@@ -27,8 +30,9 @@ public class PayController {
             return ResponseEntity.notFound().build();
         }
         PayDto payDto = PayDto.toDto(book);
-        payDto.setRoundedHours((int) (payDto.getEndTime().getTime() - payDto.getCreatedAt().getTime()));
-        payDto.setPrice(payDto.getRoundedHours() * 100);
+        long hours = Math.round((double)(payDto.getEndTime().getTime() - payDto.getCreatedAt().getTime()) / 1000 / 60 / 60);
+        payDto.setRoundedHours((int) hours);
+        payDto.setPrice(payDto.getRoundedHours() * rate);
         return ResponseEntity.ok(payDto);
     }
 
@@ -43,6 +47,16 @@ public class PayController {
         Book book = optionalBook.get();
         book.setIsPayed(true);
         bookService.update(book);
+        return ResponseEntity.ok().build();
+    }
+    @GetMapping("/rate")
+    public ResponseEntity<Integer> getRate() {
+        return ResponseEntity.ok(rate);
+    }
+
+    @PostMapping("/rate")
+    public ResponseEntity<?> changeRate(@RequestParam Integer rate) {
+        PayController.rate = rate;
         return ResponseEntity.ok().build();
     }
 }

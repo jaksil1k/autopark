@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -40,8 +41,17 @@ public class BookController {
     }
     @PutMapping
     public ResponseEntity<?> updateBook(@RequestBody Book book) {
-        bookService.update(book);
-        return ResponseEntity.ok().build();
+//        Optional<Book> optionalBook = bookService.getById(book.getId());
+//        Book book1 = optionalBook.get();
+//        book1.setName(book.getName());
+//        book1.setSlot(book.getSlot());
+//        book1.setPhone(book.getPhone());
+//        book1.setFloor(book.getFloor());
+//        book1.setIsPayed(book.getIsPayed());
+//        book1.setLicensePlate(book.getLicensePlate());
+//        book1.setCreatedAt(book.getCreatedAt());
+
+        return ResponseEntity.ok(bookService.update(book));
     }
 
     @DeleteMapping

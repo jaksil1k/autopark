@@ -6,7 +6,6 @@ import com.example.autopark.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,11 +32,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void update(Book book) {
+    public Book update(Book book) {
         if (bookRepository.findById(book.getId()).isEmpty()) {
            throw new RuntimeException();
         }
-        bookRepository.save(book);
+        return bookRepository.save(book);
     }
 
     @Override
