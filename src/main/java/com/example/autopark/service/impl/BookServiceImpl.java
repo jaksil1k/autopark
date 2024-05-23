@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getAllActual() {
-        return bookRepository.findAllActual(Calendar.getInstance().getTime());
+        return bookRepository.findAllByIsPayed(false);
     }
 
     @Override

@@ -11,8 +11,7 @@ import java.util.UUID;
 
 public interface BookRepository extends JpaRepository<Book, UUID> {
 
-    @Query(value = "SELECT * from books where created_at + interval '1 hour' * hours > NOW()", nativeQuery = true)
-    List<Book> findAllActual(Date date);
+    List<Book> findAllByIsPayed(Boolean isPayed);
 
     Optional<Book> findByLicensePlateOrderByCreatedAtDesc(String licensePlate);
 

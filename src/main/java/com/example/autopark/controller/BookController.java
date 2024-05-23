@@ -24,6 +24,7 @@ public class BookController {
         if (!bookService.checkForPayed(book.getLicensePlate())) {
             return ResponseEntity.badRequest().build();
         }
+        book.setIsPayed(false);
         bookService.save(book);
         return ResponseEntity.ok().build();
     }
@@ -35,13 +36,8 @@ public class BookController {
 
     @GetMapping("/actual")
     public ResponseEntity<?> getAllActualBooks() {
-        List<Book> books = bookService.getAllActual();
-        if (!getCurrentUser()) {
-            return ResponseEntity.ok(BookDto.toDto(books));
-        }
-        return ResponseEntity.ok(books);
+        return ResponseEntity.ok(bookService.getAllActual());
     }
-
     @PutMapping
     public ResponseEntity<?> updateBook(@RequestBody Book book) {
         bookService.update(book);
