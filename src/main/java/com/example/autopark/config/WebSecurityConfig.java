@@ -42,6 +42,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/books/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/books/**").permitAll()
+                        .requestMatchers("/pay/***").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
