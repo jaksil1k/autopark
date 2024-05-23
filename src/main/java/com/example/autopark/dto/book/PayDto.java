@@ -34,6 +34,7 @@ public class PayDto {
     public static PayDto toDto(Book book) {
         return PayDto
                 .builder()
+                .bookId(book.getId())
                 .floor(book.getFloor())
                 .slot(book.getSlot())
                 .licensePlate(book.getLicensePlate())

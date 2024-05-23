@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Boolean checkForPayed(String licensePlate) {
-        return bookRepository.findAllByLicensePlateAndIsPayed(licensePlate, true).isEmpty();
+        return bookRepository.findAllByLicensePlateAndIsPayed(licensePlate, false).isEmpty();
     }
 
 }
